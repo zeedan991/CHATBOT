@@ -18,7 +18,7 @@ public class Main  {
         u1.join();
         Thread.sleep(50);
         System.out.println("alice after join "+u2.isAlive());
-        System.out.println("Chat ended ");
+        System.out.println("Chat ended  ");
     }
 }
 class ChatUser extends Thread{
