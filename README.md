@@ -1,54 +1,42 @@
-ChatUser Thread Demo
-This Java program demonstrates the use of multithreading with thread priorities, synchronization, and lifecycle management. It simulates two chat users ("Bob" and "Alice") who send messages concurrently using separate threads with pause, resume, and stop capabilities.
+Java ChatUser Thread Example
+This project demonstrates a simple multithreaded chat simulation in Java, showcasing thread priorities, lifecycle control, and basic synchronization concepts.
 
 Overview
-Two chat users are represented by threads (ChatUser class).
+The program creates two chat users represented as threads — Bob and Alice. Each user sends a series of chat messages with controlled timing. The threads run concurrently with different priorities, and the program demonstrates key thread control operations such as pausing, resuming, and stopping threads.
 
-Bob's thread runs with maximum priority, and Alice's thread runs with minimum priority.
+Key Features
+Thread Priorities: Bob runs with maximum priority while Alice runs with minimum priority.
 
-Each user sends 5 messages, with a half-second delay between messages.
+Message Simulation: Each user sends 5 messages, with a 500ms delay between messages.
 
-The program controls thread execution with methods to pause, resume, and stop the threads.
+Thread Control: The main program can pause, resume, and stop the user threads dynamically.
 
-The main method coordinates the threads by checking thread states (isAlive()), pausing Bob, waiting for Alice to finish, then resuming and stopping Bob.
+Lifecycle Management: Uses thread state checks and join() to coordinate thread completion.
 
-Features
-Thread priority management via setPriority().
+Volatile Flags: Uses volatile booleans to manage thread pause and stop states safely.
 
-Thread lifecycle control with volatile flags:
+How It Works
+Two ChatUser threads are created and started.
 
-paused controls message sending pause.
+Bob's thread is given high priority, and Alice's low priority, to demonstrate priority effects.
 
-running controls when the thread stops entirely.
+The main thread pauses Bob, waits for Alice to finish chatting, then resumes Bob.
 
-Thread coordination using join() to wait for thread completion.
+Finally, the main thread stops Bob and waits for termination before ending the program.
 
-Demonstrates basic thread synchronization and interaction.
+Code Breakdown
+Main Class:
 
-Code Structure
-Main class contains main method that creates and manages user threads.
+Creates and starts threads.
 
-ChatUser class extends Thread and overrides run() to simulate chatting behavior.
+Controls thread states with pause, resume, and stop.
 
-Methods within ChatUser:
+Uses isAlive() and join() for thread monitoring and synchronization.
 
-Pausechat() — Pauses message sending.
+ChatUser Class (extends Thread):
 
-Resumechat() — Resumes message sending.
+Sends messages in a loop while running is true and not paused.
 
-Stopchat() — Stops the thread execution.
-Expected Output
-Messages from Bob and Alice alternating or prioritized by thread priority.
+Sleeps 500ms between messages.
 
-Indications when Bob pauses and resumes chatting.
-
-Confirmation that Alice finishes chatting before Bob resumes.
-
-Final statements that both threads have completed.
-
-Notes
-Threads are controlled using volatile flags to ensure visibility of updates between threads.
-
-The thread pause and resume use a simple flag mechanism without full synchronization primitives (for educational simplicity).
-
-This program is suitable for demonstration of basic Java concurrency concepts but is not production-grade for thread synchronization.
+Methods to pause (Pausechat()), resume (Resumechat()), and stop (Stopchat()) the thread.
